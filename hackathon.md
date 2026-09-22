@@ -294,6 +294,11 @@ scaling, hover pop-out animations, and click-to-modal show details:
   - Diagnosed desktop issue where the top of the Tinder-style discovery deck preview (anchor show pill, vibe match %, show title, and cover art) was covered by the giant full-screen "DISCOPOD" logo.
   - Root cause: `<header>` rendered the full-width hero logo with `z-30` whenever `viewState === "discovery_deck"`, while the footer had already been set to `hidden`. On desktop screens, flex centering in `<main>` pushed the top of the discovery deck directly under the 200px+ tall logo.
   - Refined layering by placing `<header>` at `z-0` at the back of the z-stack (behind `<main>` at `z-20` and modals at `z-50`) instead of hiding it: the DISCOPOD logo remains visible as background branding behind the discoball/deck, while the discovery preview card, anchor show pill, and playback controls float cleanly in front without any visual overlap (`src/routes/HomeRoute.tsx`, `hackathon.md`).
+- Constrained Entire UX to Viewport Height (100vh / 100dvh Zero-Scroll Guarantee):
+  - Diagnosed issue where completing recommendations left the app scrolled outside the 100vh viewport, leaving the view stuck in negative/shifted scroll positions upon returning to landing or search.
+  - Root cause: `HomeRoute` previously conditionally applied `overflow-x-hidden overflow-y-auto` during `discovery_deck`, and the deck wrapper had `pb-28` (112px bottom padding) and rigid `min-h-[580px]`, which pushed content past 100vh and enabled window scrolling.
+  - Eliminated window scrolling entirely: permanently locked root container to `overflow-hidden`, repositioned header to `absolute` during discovery deck mode so it consumes 0px of flex document flow, removed `pb-28 sm:pb-8` and rigid `min-h-[580px]` so the card deck naturally sizes (~470px) and centers vertically, and added automatic `window.scrollTo(0, 0)` resets on view transitions and deck completion (`src/routes/HomeRoute.tsx`, `src/features/discovery/TinderDiscoveryDeck.tsx`, `hackathon.md`).
+
 
 
 

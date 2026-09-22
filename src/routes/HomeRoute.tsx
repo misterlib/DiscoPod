@@ -901,11 +901,14 @@ function LandingScreen({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [viewState, setViewState]);
 
+  // Guarantee window scroll is locked to (0, 0) whenever viewState changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [viewState]);
+
   return (
     <div
-      className={`relative flex h-screen h-[100dvh] max-h-[100dvh] w-full flex-col justify-between ${
-        viewState === "discovery_deck" ? "overflow-x-hidden overflow-y-auto" : "overflow-hidden"
-      } bg-disco-dark select-none`}
+      className="relative flex h-screen h-[100dvh] max-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-disco-dark select-none"
     >
       {/* 3D Wireframe & Cover Art Discoball Scene - 3x as tall, positioned 150px lower */}
       <div
@@ -923,7 +926,13 @@ function LandingScreen({
       </div>
 
       {/* Top Header: Logo with responsive padding - placed at z-0 at the back of the z-stack behind interactive cards */}
-      <header className="pointer-events-none relative z-0 pt-3 sm:pt-[30px] px-3 sm:px-[30px] w-full shrink-0 transition-all duration-300">
+      <header
+        className={`pointer-events-none z-0 px-3 sm:px-[30px] w-full transition-all duration-300 ${
+          viewState === "discovery_deck"
+            ? "absolute top-3 sm:top-[30px] left-0 right-0"
+            : "relative pt-3 sm:pt-[30px] shrink-0"
+        }`}
+      >
         <div className="relative w-full flex flex-col items-center justify-center">
           {/* Center: DISCOPOD Logo - smoothly shrinks from full width; sized to extend into card border */}
           <img
@@ -984,7 +993,7 @@ function LandingScreen({
       <main
         className={`relative z-20 flex flex-1 min-h-0 px-2 sm:px-[30px] ${
           viewState === "discovery_deck"
-            ? "items-start sm:items-center justify-center py-2 sm:py-6 pointer-events-auto"
+            ? "items-center justify-center py-1 sm:py-2 pointer-events-auto"
             : isExpandedView
               ? "items-stretch pb-3 sm:pb-[30px] -mt-[9px] sm:-mt-[11px] md:-mt-[13px] pointer-events-none"
               : "items-center justify-center py-2 sm:py-4 pointer-events-none"
@@ -1025,7 +1034,7 @@ function LandingScreen({
 
         {/* State: Tinder-esque Discovery Deck */}
         {viewState === "discovery_deck" && seedPodcast ? (
-          <div className="pointer-events-auto w-full flex items-start sm:items-center justify-center pb-28 sm:pb-8 my-auto">
+          <div className="pointer-events-auto w-full flex items-center justify-center my-auto">
             {discoveryLoading ? (
               <div className="rounded-3xl bg-disco-navy p-8 shadow-2xl border border-white/10 text-center space-y-3 animate-spring-in max-w-sm">
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-disco-rose border-t-transparent" />
