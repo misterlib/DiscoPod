@@ -293,6 +293,7 @@ scaling, hover pop-out animations, and click-to-modal show details:
 - Fixed Desktop Discovery Deck Header Overlap & Restored Preview Visibility:
   - Diagnosed desktop issue where the top of the Tinder-style discovery deck preview (anchor show pill, vibe match %, show title, and cover art) was covered by the giant full-screen "DISCOPOD" logo.
   - Root cause: `<header>` rendered the full-width hero logo with `z-30` whenever `viewState === "discovery_deck"`, while the footer had already been set to `hidden`. On desktop screens, flex centering in `<main>` pushed the top of the discovery deck directly under the 200px+ tall logo.
-  - Fixed by adding `viewState === "discovery_deck" ? "hidden" : ""` to `<header>` in `src/routes/HomeRoute.tsx` (mirroring the footer) and adding `my-auto` to the deck wrapper to ensure clean vertical centering without negative coordinate overflow (`src/routes/HomeRoute.tsx`, `hackathon.md`).
+  - Refined layering by placing `<header>` at `z-0` at the back of the z-stack (behind `<main>` at `z-20` and modals at `z-50`) instead of hiding it: the DISCOPOD logo remains visible as background branding behind the discoball/deck, while the discovery preview card, anchor show pill, and playback controls float cleanly in front without any visual overlap (`src/routes/HomeRoute.tsx`, `hackathon.md`).
+
 
 

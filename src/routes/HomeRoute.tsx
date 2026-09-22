@@ -922,12 +922,8 @@ function LandingScreen({
         />
       </div>
 
-      {/* Top Header: Logo with responsive padding */}
-      <header
-        className={`pointer-events-none relative z-30 pt-3 sm:pt-[30px] px-3 sm:px-[30px] w-full shrink-0 transition-all duration-300 ${
-          viewState === "discovery_deck" ? "hidden" : ""
-        }`}
-      >
+      {/* Top Header: Logo with responsive padding - placed at z-0 at the back of the z-stack behind interactive cards */}
+      <header className="pointer-events-none relative z-0 pt-3 sm:pt-[30px] px-3 sm:px-[30px] w-full shrink-0 transition-all duration-300">
         <div className="relative w-full flex flex-col items-center justify-center">
           {/* Center: DISCOPOD Logo - smoothly shrinks from full width; sized to extend into card border */}
           <img
@@ -968,7 +964,7 @@ function LandingScreen({
                 onClick={() => setViewState("saved")}
                 title={likedCount > 0 ? `${likedCount} liked podcasts` : "Liked podcasts"}
                 aria-label="View Liked Podcasts"
-                className="flex items-center gap-1 rounded-full bg-white/10 hover:bg-rose-500/20 text-disco-cream px-2 py-0.5 text-[10px] font-bold border border-white/10 active:scale-95 transition cursor-pointer"
+                className="pointer-events-auto flex items-center gap-1 rounded-full bg-white/10 hover:bg-rose-500/20 text-disco-cream px-2 py-0.5 text-[10px] font-bold border border-white/10 active:scale-95 transition cursor-pointer"
               >
                 <Heart
                   className={`h-3 w-3 ${
