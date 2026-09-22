@@ -417,9 +417,15 @@ export function TinderDiscoveryDeck({
   const isDeckFinished = currentIndex >= recommendations.length;
   const likedShows = recommendations.filter((show) => likedShowIds.includes(show.showId));
 
+  useEffect(() => {
+    if (isDeckFinished) {
+      window.scrollTo(0, 0);
+    }
+  }, [isDeckFinished]);
+
   if (isDeckFinished) {
     return (
-      <div className="relative z-30 w-full max-w-xl animate-spring-in px-4">
+      <div className="relative z-30 w-full max-w-xl animate-spring-in px-4 my-auto">
         <div className="rounded-3xl bg-disco-navy p-6 sm:p-8 shadow-2xl border border-white/10 text-center space-y-6 backdrop-blur-md">
           <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-disco-rose/20 text-disco-rose border border-disco-rose/40 shadow-inner">
             <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
@@ -522,7 +528,7 @@ export function TinderDiscoveryDeck({
   const nextShow = recommendations[currentIndex + 1];
 
   return (
-    <div className="relative z-30 w-full max-w-lg animate-spring-in px-4 select-none">
+    <div className="relative z-30 w-full max-w-lg animate-spring-in px-4 select-none my-auto">
       {/* Hidden HTML5 Audio Element */}
       {activeClip?.audioUrl ? (
         <audio
@@ -538,7 +544,7 @@ export function TinderDiscoveryDeck({
       ) : null}
 
       {/* Top Header Bar - 100% Solid & Non-Transparent */}
-      <div className="mb-3 flex items-center justify-between px-3 py-2 rounded-2xl bg-disco-dark border border-white/15 shadow-2xl backdrop-blur-md">
+      <div className="mb-2.5 sm:mb-3 flex items-center justify-between px-3 py-2 rounded-2xl bg-disco-dark border border-white/15 shadow-2xl backdrop-blur-md">
         <div className="flex items-center gap-2 min-w-0">
           <span className="shrink-0 text-[10px] font-black uppercase tracking-widest text-disco-cream/90">
             SIMILAR TO:
@@ -569,7 +575,7 @@ export function TinderDiscoveryDeck({
       </div>
 
       {/* Stacked Card Deck Container */}
-      <div className="relative min-h-[480px] sm:min-h-[580px] w-full">
+      <div className="relative w-full">
         {/* Next Card in Stack (Peek Preview Behind, Scaling Up as Top Card Swipes) */}
         {nextShow ? (
           <div
