@@ -290,4 +290,9 @@ scaling, hover pop-out animations, and click-to-modal show details:
 - Hardened Agent Mail Boundaries & Eliminated Unsolicited Marketing Tips:
   - Removed prompt directive that instructed the LLM to provide engagement feedback, which had caused it to hallucinate generic podcast promotion coaching ("collaborate with creators, promote on social media").
   - Implemented strict boundaries: GPT-4o is restricted to answering questions strictly about DiscoPod features (AI clip selection, clip timestamps, quote/hook updates, claim codes, or removal) with an explicit prohibition against marketing or growth advice (`convex/agentMailHandler.ts`, `hackathon.md`).
+- Fixed Desktop Discovery Deck Header Overlap & Restored Preview Visibility:
+  - Diagnosed desktop issue where the top of the Tinder-style discovery deck preview (anchor show pill, vibe match %, show title, and cover art) was covered by the giant full-screen "DISCOPOD" logo.
+  - Root cause: `<header>` rendered the full-width hero logo with `z-30` whenever `viewState === "discovery_deck"`, while the footer had already been set to `hidden`. On desktop screens, flex centering in `<main>` pushed the top of the discovery deck directly under the 200px+ tall logo.
+  - Fixed by adding `viewState === "discovery_deck" ? "hidden" : ""` to `<header>` in `src/routes/HomeRoute.tsx` (mirroring the footer) and adding `my-auto` to the deck wrapper to ensure clean vertical centering without negative coordinate overflow (`src/routes/HomeRoute.tsx`, `hackathon.md`).
+
 

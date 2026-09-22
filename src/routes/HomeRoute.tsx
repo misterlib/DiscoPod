@@ -923,7 +923,11 @@ function LandingScreen({
       </div>
 
       {/* Top Header: Logo with responsive padding */}
-      <header className="pointer-events-none relative z-30 pt-3 sm:pt-[30px] px-3 sm:px-[30px] w-full shrink-0">
+      <header
+        className={`pointer-events-none relative z-30 pt-3 sm:pt-[30px] px-3 sm:px-[30px] w-full shrink-0 transition-all duration-300 ${
+          viewState === "discovery_deck" ? "hidden" : ""
+        }`}
+      >
         <div className="relative w-full flex flex-col items-center justify-center">
           {/* Center: DISCOPOD Logo - smoothly shrinks from full width; sized to extend into card border */}
           <img
@@ -1025,7 +1029,7 @@ function LandingScreen({
 
         {/* State: Tinder-esque Discovery Deck */}
         {viewState === "discovery_deck" && seedPodcast ? (
-          <div className="pointer-events-auto w-full flex items-start sm:items-center justify-center pb-28 sm:pb-8">
+          <div className="pointer-events-auto w-full flex items-start sm:items-center justify-center pb-28 sm:pb-8 my-auto">
             {discoveryLoading ? (
               <div className="rounded-3xl bg-disco-navy p-8 shadow-2xl border border-white/10 text-center space-y-3 animate-spring-in max-w-sm">
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-disco-rose border-t-transparent" />
