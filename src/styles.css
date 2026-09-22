@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --font-passion: "Passion One", cursive, sans-serif;
+  --font-lato: "Lato", sans-serif;
+
+  --color-disco-dark: #2a2325;
+  --color-disco-cream: #dad1bd;
+  --color-disco-navy: #354156;
+  --color-disco-rose: #b97179;
+  --color-disco-caramel: #ba805a;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: var(--font-lato);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #2a2325;
+  color: #dad1bd;
+  font-family: var(--font-lato);
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+}
+
+@keyframes springIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popCard {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-spring-in {
+  animation: springIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pop-card {
+  animation: popCard 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes growFromBottomLeft {
+  0% {
+    opacity: 0.15;
+    transform: scale(0.08) translate(-35%, 50%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes growFromBottomRight {
+  0% {
+    opacity: 0.15;
+    transform: scale(0.08) translate(35%, 50%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes growFromBottomCenter {
+  0% {
+    opacity: 0.15;
+    transform: scale(0.08) translate(0, 50%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes dropFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-160%);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(6%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popInCircle {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.24);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-grow-left {
+  animation: growFromBottomLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom left;
+}
+
+.animate-grow-right {
+  animation: growFromBottomRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom right;
+}
+
+.animate-grow-center {
+  animation: growFromBottomCenter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom center;
+}
+
+.animate-drop-top {
+  animation: dropFromTop 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.animate-pop-in {
+  animation: popInCircle 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s both;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(186, 128, 90, 0.35);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(186, 128, 90, 0.6);
+}
+
